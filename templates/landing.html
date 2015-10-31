@@ -168,13 +168,20 @@
 
 			$('document').ready(function (){
 
-				$('#btn-register').click(function(){
+				$('#btn-register').click(function(){					
 					$.ajax({
 						url:'users/signup',
 						type:'post',
-						data:$('#signup-form').serialize()
+						data:$('#form-signup').serialize(),
+						success: function(){
+							window.alert('Registration Success!')
+						},
+						error: function(){
+							window.alert('Registration failed!')
+						}
 					})
-					$('#signUpModal').modal('toggle');
+					
+					$('#signUpModal').modal('hide')	
 				})
 			})
 
