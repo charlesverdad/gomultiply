@@ -110,6 +110,10 @@
 
 			}
 
+			.mdl-navigation button{
+				margin:5px;
+			}
+
 			
 		</style>
 
@@ -154,12 +158,28 @@
 	<body>
 
 
-
+		<script src="/static/gomultiply/js/ajaxcalls.js"></script>
 		<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.indigo-pink.min.css">
 		<script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
+		<script>
 
+
+			$('document').ready(function (){
+
+				$('#btn-register').click(function(){
+					$.ajax({
+						url:'users/signup',
+						type:'post',
+						data:$('#signup-form').serialize()
+					})
+					$('#signUpModal').modal('toggle');
+				})
+			})
+
+
+		</script>
 
 		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 			<header class="mdl-layout__header--transparent">
@@ -168,10 +188,12 @@
 				<div class="mdl-layout-spacer"></div>
 				<nav class="mdl-navigation mdl-layout--large-screen-only">
 					<a class="mdl-navigation__link" href="">Go</a>
-					<a class="mdl-navigation__link" href="">Host</a>
 					<a class="mdl-navigation__link" href="">Give</a>
 					<a class="mdl-navigation__link" href="">Mobilize</a>
-					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#signUpModal">
+					<button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" data-toggle="modal" data-target="#proposeCampaignModal">
+ 						 Host
+					</button>
+					<button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" data-toggle="modal" data-target="#signUpModal">
  						 Sign Up
 					</button>
 					<!--<a class="mdl-navigation__link" data-toggle="modal" data-target="#myModal">Sign up</a>-->
@@ -252,6 +274,11 @@
 		</div>
 
 
+
+
+
+
+
 		<!-- Sign Up Modal -->
 		<div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  <div class="modal-dialog" role="document">
@@ -261,7 +288,7 @@
 		        <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
 		      </div>
 		      <div class="modal-body">
-		         <form role="form">
+		         <form id="form-signup" role="form">
 		                            <div class="form-group">
 		                                <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
 		                            </div>
@@ -290,18 +317,87 @@
 		                                    </div>
 		                                </div>
 		                            </div>
-
-		                            <input type="submit" value="Register" class="btn btn-info btn-block">
-		                        </form>
+		        					<!--<input type="submit" value="Register" class="btn btn-info btn-block">-->
+		        					
+		        </form>
+		        <button id="btn-register">Register</button>
+		                            
+		                        
 		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Save changes</button>
-		      </div>
 
 
 
-
+			<!-- Modal -->
+			<div class="modal fade" id="proposeCampaignModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Propose a Campaign</h4>
+			      </div>
+			      <div class="modal-body">
+			         <form id="signup-form" role="form">
+			               <div class="form-group">      
+			                    <label for="campaignName" class="col-sm-2 control-label">
+			                        Name
+			                    </label>
+			                    <input type="text" class="form-control" placeholder="Text input">
+			                </div>
+			                 <div class="form-group">      
+			                    <label for="currentNeed" class="col-sm-5 control-label">
+			                        Current Need
+			                    </label>
+			                    <textarea class="form-control" rows="3" placeholder=""></textarea>
+			                </div>
+			                <div class="form-group">      
+			                    <label for="goal" class="col-sm-2 control-label">
+			                        Goal
+			                    </label>
+			                    <textarea class="form-control" rows="3" placeholder=""></textarea>
+			                </div>
+			                <div class="form-group">      
+			                    <label for="goal" class="col-sm-2 control-label">
+			                        Cost
+			                    </label>
+			                    <div class="input-group">
+			                    <div class="input-group-addon">Php</div>
+			                    <input type="text" class="form-control" id="exampleInputAmount" placeholder="amount">
+			                    <div class="input-group-addon">.00</div>
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label for="location">Location</label>
+			                    <input type="text" class="form-control" id="location" placeholder="Boracay, Philippines">
+			                </div>
+			                <div class="form-group">
+			                    <label for="location">Duration</label>
+			                    <input type="text" class="form-control" id="duration" placeholder="3 days">
+			                </div>
+			                <div class="form-group">
+			                    <label for="location">Date Start</label>
+			                    <input type="text" class="form-control" id="dateStart" placeholder="October 25, 2015">
+			                </div>
+			                <div class="form-group">
+			                    <label for="location">Difficulty</label>
+			                    <input type="number" class="form-control" id="difficulty" placeholder="Select between 1-5">
+			                </div>
+			                 <div class="form-group">
+			                    <label for="location">Field</label>
+			                    <input type="text" class="form-control" id="field" placeholder="E.g. Education, Medical Mission, Evangelistic">
+			                </div>
+			                 <div class="form-group">
+			                    <label for="location">Maximum Number of People to Host</label>
+			                    <input type="number" id="btn-signup-register" class="form-control" id="field" placeholder="10">
+			                </div>   
+			                </form>             
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-primary">Save changes</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
 
 		</body>
 
