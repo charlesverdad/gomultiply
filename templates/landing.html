@@ -168,9 +168,10 @@
 
 			$('document').ready(function (){
 
-				$('#btn-register').click(function(){					
+				$('#btn-register').click(function(){		
+					console.log($('#form-signup').serialize())			
 					$.ajax({
-						url:'users/signup',
+						url:'users/create',
 						type:'post',
 						data:$('#form-signup').serialize(),
 						success: function(){
@@ -178,6 +179,9 @@
 						},
 						error: function(){
 							window.alert('Registration failed!')
+						},
+						complete: function(response){
+							console.log(response)
 						}
 					})
 					

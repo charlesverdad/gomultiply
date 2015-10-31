@@ -19,5 +19,6 @@ from django.contrib import admin
 urlpatterns = [
 	url(r'^$', 'gomultiply.views.home'),
     url(r'^admin/', include(admin.site.urls)),
+	url(r'^users/create/', 'users.views.handle_user_signup'),
 
 ]
