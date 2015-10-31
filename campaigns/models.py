@@ -1,13 +1,14 @@
 from django.db import models
 
 # Create your models here.
-#sample:
-class Person(models.Model):
-	fbid 		= models.CharField(max_length=20)		#facebook id
-	fbusername 	= models.CharField(max_length=20)
-	firstname 	= models.CharField(max_length=50)
-	lastname 	= models.CharField(max_length=50)
-	chain 		= models.ForeignKey('self', null=True, blank=True)	#immediate discipler id as Person object. to access down the chain, use person_set
-	discipler	= models.CharField(max_length=50)		#first and last name of discipler.
-	def __unicode__(self):
-		return self.firstname + " " + self.lastname
+class Campaign(models.Model):
+    cost = models.FloatField(null=True, blank=True)
+    location = models.CharField(null=True, max_length=300)
+    duration = models.FloatField(null=True, blank=True)
+    start_date = models.DateField(null=True)
+    difficulty = models.IntegerField(null=True)
+    field = models.CharField(null=True, max_length=30)
+    requirements = models.CharField(null=True, max_length=200)
+    max_people = models.IntegerField(null=True)
+    needs = models.CharField(null=True, max_length=200)
+    goals = models.CharField(null=True, max_length=200)
