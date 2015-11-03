@@ -8,5 +8,8 @@ def handle_user_signup(request):
 	if request.method != 'POST':
 		raise Http404
 
- 	return redirect('/')
+
+	print request.POST
+
+	return HttpResponse('hello world!')
  	
