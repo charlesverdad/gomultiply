@@ -9,7 +9,6 @@ def handle_user_signup(request):
 		raise Http404
 
 
-	print request.POST
-
+	print str(request.session)
 	return HttpResponse('hello world!')
  	
